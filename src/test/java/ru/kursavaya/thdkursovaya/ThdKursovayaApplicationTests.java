@@ -1,4 +1,4 @@
-package ru.kursavaya.vlad.thdkursovaya;
+package ru.kursavaya.thdkursovaya;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,5 +1,4 @@
-package ru.kursavaya.vlad.thdkursovaya.model;
-
+package ru.kursavaya.thdkursovaya.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "departaments")
-public class Departaments {
+@Table(name = "plan_of_work")
+public class PlanOfWork {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -19,4 +18,13 @@ public class Departaments {
     private int id;
     @Column
     private char name;
+    @Column
+    private char deadline;
+    @Column
+    private char workload;
+    @Column
+    private int fk_departament_id;
+
+
+
 }

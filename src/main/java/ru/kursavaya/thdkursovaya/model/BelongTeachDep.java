@@ -1,4 +1,4 @@
-package ru.kursavaya.vlad.thdkursovaya.model;
+package ru.kursavaya.thdkursovaya.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,17 +9,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "fk_izdayot")
-public class Publish {
+@Table(name = "fk_teacher_dep")
+public class BelongTeachDep {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column
+    private int id_teacher;
 
     @Column
     private int id_departament;
 
     @Column
-    private int id_literature;
-
-    @Column
-    private char date;
+    private int date_start_work;
 }

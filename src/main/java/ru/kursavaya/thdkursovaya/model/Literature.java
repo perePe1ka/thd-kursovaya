@@ -1,4 +1,4 @@
-package ru.kursavaya.vlad.thdkursovaya.model;
+package ru.kursavaya.thdkursovaya.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

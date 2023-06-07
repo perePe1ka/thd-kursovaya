@@ -1,4 +1,4 @@
-package ru.kursavaya.vlad.thdkursovaya.model;
+package ru.kursavaya.thdkursovaya.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,14 +9,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "fk_spec_discip")
-public class BelongDisSpec {
+@Table (name = "Speciality")
+public class Speciality {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column
-    private int id_speciality;
-
+    private int id;
     @Column
-    private int id_discipline;
+    private char name;
+
+
+
 }
