@@ -3,7 +3,7 @@
 <html lang="" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Преподаватели</title>
-    <link rel="stylesheet" href="../static/css/tables.css">
+    <link rel="stylesheet" href="../static/tables.css">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 </head>
 <body>
@@ -14,16 +14,13 @@
             <span></span>
         </label>
         <ul class="menubox">
-            <li><a class="menubox_ref" href="/">Преподаватели</a></li>
-            <li><a class="menubox_ref" href="/specialityt">Специальности</a></li>
-            <li><a class="menubox_ref" href="/planofwork">Планируемая работа</a></li>
+            <li><a class="menubox_ref" href="/">На главную</a></li>
+            <li><a class="menubox_ref" href="/teachers">Преподаватели</a></li>
+            <li><a class="menubox_ref" href="/speciality">Специальности</a></li>
+            <li><a class="menubox_ref" href="/planOfWork">Планируемая работа</a></li>
             <li><a class="menubox_ref" href="/literature">Методическая литература</a></li>
             <li><a class="menubox_ref" href="/discipline">Дисциплины</a></li>
             <li><a class="menubox_ref" href="/departaments">Кафедры</a></li>
-            <li><a class="menubox_ref" href="/publish">Преподаватель/Литература</a></li>
-            <li><a class="menubox_ref" href="/leads">Преподаватель/Дисциплина</a></li>
-            <li><a class="menubox_ref" href="/belongdispec">Спецальность/Дисциплина</a></li>
-            <li><a class="menubox_ref" href="/belongteachdep">Учитель/Кафедра</a></li>
         </ul>
     </div>
     <div id="content">
@@ -34,27 +31,53 @@
             <h2>Преводаватели</h2>
             <button class="add-button" onclick="openForm()">Добавить преподавателя</button>
         </div>
-        <form th:action="@{/artist}" method="GET">
+
+
+
+
+        <#if listLiterature ??>
             <table>
                 <thead>
-                <tr>
-                    <th>Имя преподавателя</th>
-                    <th>Действия</th>
-                </tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Вид материала</th>
+                <th>Референс на специальность</th>
+                <th>Референс на дисциплину</th>
+                <th>Референс на Преподов</th>
+                <th>Референс на Кафедры</th>
+                <th>Удалить</th>
                 </thead>
                 <tbody>
-                <tr th:each="artist : ${artists}">
-                    <td th:text="${artist.fullName}"></td>
-                    <td>
-                        <a th:href="@{/artist/edit/{id}(id=${artist.fullName})}"><span>&#9999;</span></a>
-                        <form th:action="@{/artist/delete/{id}(id=${artist.fullName})}" method="POST">
-                            <button type="submit"><span>&#10060;</span></button>
-                        </form>
-                    </td>
-                </tr>
+                <#list listLiterature as literature>
+                    <tr>
+                        <td>${literature.id}</td>
+                        <td>${literature.name}</td>
+                        <td>${literature.type_of_material}</td>
+                        <td>${literature.speciality.name}</td>
+                        <td>
+                            ${literature.discipline.name},
+                            ${literature.discipline.class_type}.
+                        </td>
+                        <td>
+                            ${literature.teachers.fullName}
+                        </td>
+                        <td>
+                            <#list literature.departaments as departaments> <!-- Итерация по множеству кафедр -->
+                                ${departaments.name}<br> <!-- Получение имени каждой кафедры -->
+                            </#list>
+                        </td>
+
+                        <td><a href="paper/delete/${literature.id}">Удалить</a></td>
+                    </tr>
+                </#list>
                 </tbody>
             </table>
-        </form>
+        </#if>
+
+
+
+
+
     </div>
 </div>
 <div id="myModal" class="modal">

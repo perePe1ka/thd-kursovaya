@@ -3,7 +3,7 @@
 <html lang="" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Преподаватели</title>
-    <link rel="stylesheet" href="../static/css/tables.css">
+    <link rel="stylesheet" href="../static/tables.css">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 </head>
 <body>
@@ -15,15 +15,11 @@
         </label>
         <ul class="menubox">
             <li><a class="menubox_ref" href="/">Преподаватели</a></li>
-            <li><a class="menubox_ref" href="/specialityt">Специальности</a></li>
-            <li><a class="menubox_ref" href="/planofwork">Планируемая работа</a></li>
+            <li><a class="menubox_ref" href="/speciality">Специальности</a></li>
+            <li><a class="menubox_ref" href="/planOfWork">Планируемая работа</a></li>
             <li><a class="menubox_ref" href="/literature">Методическая литература</a></li>
             <li><a class="menubox_ref" href="/discipline">Дисциплины</a></li>
             <li><a class="menubox_ref" href="/departaments">Кафедры</a></li>
-            <li><a class="menubox_ref" href="/publish">Преподаватель/Литература</a></li>
-            <li><a class="menubox_ref" href="/leads">Преподаватель/Дисциплина</a></li>
-            <li><a class="menubox_ref" href="/belongdispec">Спецальность/Дисциплина</a></li>
-            <li><a class="menubox_ref" href="/belongteachdep">Учитель/Кафедра</a></li>
         </ul>
     </div>
     <div id="content">
