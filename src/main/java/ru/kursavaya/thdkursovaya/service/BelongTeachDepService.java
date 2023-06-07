@@ -2,7 +2,6 @@ package ru.kursavaya.thdkursovaya.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kursavaya.thdkursovaya.model.BelongDisSpec;
 import ru.kursavaya.thdkursovaya.model.BelongTeachDep;
 import ru.kursavaya.thdkursovaya.repository.BelongTeachDepRepository;
 

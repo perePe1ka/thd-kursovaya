@@ -1,7 +1,6 @@
 package ru.kursavaya.thdkursovaya.service;
 
 import ru.kursavaya.thdkursovaya.model.Leads;
-import ru.kursavaya.thdkursovaya.model.Speciality;
 import ru.kursavaya.thdkursovaya.model.Teachers;
 
 import java.util.List;

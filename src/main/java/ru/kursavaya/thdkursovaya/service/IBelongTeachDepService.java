@@ -1,6 +1,5 @@
 package ru.kursavaya.thdkursovaya.service;
 
-import ru.kursavaya.thdkursovaya.model.BelongDisSpec;
 import ru.kursavaya.thdkursovaya.model.BelongTeachDep;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package ru.kursavaya.thdkursovaya.service;
 
 import ru.kursavaya.thdkursovaya.model.Leads;
-import ru.kursavaya.thdkursovaya.model.Literature;
 import ru.kursavaya.thdkursovaya.model.PlanOfWork;
 
 import java.util.List;
