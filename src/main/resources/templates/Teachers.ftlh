@@ -47,13 +47,13 @@
                         <td>${teacher.id}</td>
                         <td>${teacher.fullName}</td>
                         <td>
-                            <#list teacher.departaments as department> <!-- Итерация по множеству кафедр -->
-                                ${department.name}<br> <!-- Получение имени каждой кафедры -->
+                            <#list teacher.departaments as department>
+                                ${department.name}<br>
                             </#list>
                         </td>
                         <td>
-                            <#list teacher.discipline as discipline> <!-- Итерация по множеству кафедр -->
-                                ${discipline.name}<br> <!-- Получение имени каждой кафедры -->
+                            <#list teacher.discipline as discipline>
+                                ${discipline.name}<br>
                             </#list>
                         </td>
                         <td>
@@ -64,7 +64,6 @@
                                 ${teacher.planOfWork.workload}.
 
                         <#else>
-                            <!-- Handle the case when teacher.planOfWork is null or missing -->
                             No plan of work available
                         </#if>
                         </td>
@@ -94,6 +93,9 @@
                 <tr>
                     <td>Имя преподавателя:</td>
                     <td><input type="text" name="fullName"/></td>
+                    <td><input type="text" name="planOfWork"/></td>
+                    <td><input type="text" name="departaments"/></td>
+                    <td><input type="text" name="discipline"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">

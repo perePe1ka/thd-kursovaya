@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.kursavaya.vlad.thdkursovaya.model.*;
 import ru.kursavaya.vlad.thdkursovaya.service.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 @Controller
 public class MainController {
@@ -74,16 +78,51 @@ public class MainController {
     }
 
     @PostMapping("/createTeachers")
-    public String createTeachers(@ModelAttribute Teachers teachers) {
+    public String createTeachers(@ModelAttribute Teachers teachers,
+                                 @RequestParam(value = "departmentIds", required = false) List<Integer> departmentIds,
+                                 @RequestParam(value = "disciplineIds", required = false) List<Integer> disciplineIds) {
+        // Если указаны кафедры, обработайте их и сохраните в объекте преподавателя
+        if (departmentIds != null && !departmentIds.isEmpty()) {
+            Set<Departaments> departaments = new HashSet<>();
+            for (Integer departmentId : departmentIds) {
+                Departaments department = departamentsService.getDepartaments(departmentId);
+                departaments.add(department);
+            }
+            teachers.setDepartaments(departaments);
+        }
+
+        // Если указаны дисциплины, обработайте их и сохраните в объекте преподавателя
+        if (disciplineIds != null && !disciplineIds.isEmpty()) {
+            Set<Discipline> disciplines = new HashSet<>();
+            for (Integer disciplineId : disciplineIds) {
+                Discipline discipline = disciplineService.getDiscipline(disciplineId);
+                disciplines.add(discipline);
+            }
+            teachers.setDiscipline(disciplines);
+        }
+
         teachersService.create(teachers);
         return "redirect:/teachers";
     }
 
+
     @PostMapping("/createSpeciality")
-    public String createSpeciality(@ModelAttribute Speciality speciality) {
+    public String createSpeciality(@ModelAttribute Speciality speciality, @RequestParam(value = "disciplineIds", required = false) List<Integer> disciplineIds) {
+        // Если указаны дисциплины, обработайте их и сохраните в объекте специальности
+        if (disciplineIds != null && !disciplineIds.isEmpty()) {
+            Set<Discipline> disciplines = new HashSet<>();
+            for (Integer disciplineId : disciplineIds) {
+                Discipline discipline = disciplineService.getDiscipline(disciplineId);
+                disciplines.add(discipline);
+            }
+            speciality.setDiscipline(disciplines);
+        }
+
         specialityService.create(speciality);
         return "redirect:/speciality";
     }
+
+
 
     @PostMapping("/createPlanOfWork")
     public String createPlanOfWork(@ModelAttribute PlanOfWork planOfWork) {

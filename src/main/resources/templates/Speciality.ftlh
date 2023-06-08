@@ -75,7 +75,10 @@
             <table>
                 <tr>
                     <td>Название специальности:</td>
-                    <td><input type="text" name="name"/></td>
+                    <td>
+                        <input type="text" name="name"/>
+                        <input type="text" name="discipline"/>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
