@@ -142,6 +142,8 @@ public class MainController {
         return "redirect:/departaments";
     }
 
+
+
     //УДАЛЕНИЯ СДЕЛАНЫ НИЖЕ
 
     @PostMapping("/teacher/delete/{id}")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" xmlns:th="<http://www.thymeleaf.org>">
+<html lang="" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Преподаватели</title>
     <link rel="stylesheet" href="../static/tables.css">
@@ -13,13 +13,13 @@
             <span></span>
         </label>
         <ul class="menubox">
-                <li><a class="menubox_ref" href="/">На главную</a></li>
-                <li><a class="menubox_ref" href="/teachers">Преподаватели</a></li>
-                <li><a class="menubox_ref" href="/speciality">Специальности</a></li>
-                <li><a class="menubox_ref" href="/planOfWork">Планируемая работа</a></li>
-                <li><a class="menubox_ref" href="/literature">Методическая литература</a></li>
-                <li><a class="menubox_ref" href="/discipline">Дисциплины</a></li>
-                <li><a class="menubox_ref" href="/departaments">Кафедры</a></li>
+            <li><a class="menubox_ref" href="/">На главную</a></li>
+            <li><a class="menubox_ref" href="/teachers">Преподаватели</a></li>
+            <li><a class="menubox_ref" href="/speciality">Специальности</a></li>
+            <li><a class="menubox_ref" href="/planOfWork">Планируемая работа</a></li>
+            <li><a class="menubox_ref" href="/literature">Методическая литература</a></li>
+            <li><a class="menubox_ref" href="/discipline">Дисциплины</a></li>
+            <li><a class="menubox_ref" href="/departaments">Кафедры</a></li>
         </ul>
     </div>
     <div id="content">
@@ -27,18 +27,18 @@
             <h1>Преподаватели</h1>
         </div>
         <div class="header">
+            <input type="text" id="searchInput" placeholder="Поиск по ФИО" onkeyup="searchTable()" />
             <button class="add-button" onclick="openForm()">Добавить преподавателя</button>
         </div>
-
 
         <#if listTeachers ??>
             <table>
                 <thead>
                 <th>ID</th>
                 <th>ФИО</th>
-                <th>Кафедра</th>
-                <th>Дисциплина</th>
-                <th>Планируемая работа</th>
+                <th>Принадлежит кафедре</th>
+                <th>Ведет дисциплину</th>
+                <th>Имеет работу</th>
                 <th>Удалить</th>
                 <th>Изменить</th>
                 </thead>
@@ -58,24 +58,25 @@
                             </#list>
                         </td>
                         <td>
-                        <#if teacher.planOfWork??>
+                            <#if teacher.planOfWork??>
 
                                 ${teacher.planOfWork.deadline},
                                 ${teacher.planOfWork.name},
                                 ${teacher.planOfWork.workload}.
 
-                        <#else>
-                            No plan of work available
-                        </#if>
+                            <#else>
+                                No plan of work available
+                            </#if>
                         </td>
 
-                        <td><form action="/teacher/delete/${teacher.id}" method="post">
+                        <td>
+                            <form action="/teacher/delete/${teacher.id}" method="post">
                                 <input type="submit" value="Удалить"/>
                             </form>
                         </td>
                         <td>
                             <div>
-                                <button class="add-button" onclick="openEditForm()">Изменить</button>
+                                <button class="add-button" onclick="openEditForm(${teacher.id})">Изменить</button>
                             </div>
                         </td>
                     </tr>
@@ -83,27 +84,21 @@
                 </tbody>
             </table>
         </#if>
-
-
-
-
     </div>
 </div>
-<div id="myEditModal" class="modal">
+
+<div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditForm()">&times;</span>
-        <h2>Изменить</h2>
-
-        <form action="/createDepartaments" method="post">
-
+        <span class="close" onclick="closeForm()">&times;</span>
+        <h2>Добавить преподавателя</h2>
+        <form action="/createTeachers" method="post">
             <table>
                 <tr>
-                    <td>Название преподавателя:</td>
-                    <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
-                    </td>
+                    <td>Имя преподавателя:</td>
+                    <td><input type="text" name="fullName"/></td>
+                    <td><input type="text" name="planOfWork"/></td>
+                    <td><input type="text" name="departaments"/></td>
+                    <td><input type="text" name="discipline"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -114,6 +109,32 @@
         </form>
     </div>
 </div>
+
+<#list listTeachers as teacher>
+    <div id="myEditModal-${teacher.id}" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditForm(${teacher.id})">&times;</span>
+            <h2>Изменить преподавателя</h2>
+            <form action="/teachers/edit/${teacher.id}" method="post">
+                <table>
+                    <tr>
+                        <td>Изменить:</td>
+                        <td><input type="text" name="fullName"/></td>
+                        <td><input type="text" name="planOfWork"/></td>
+                        <td><input type="text" name="departaments"/></td>
+                        <td><input type="text" name="discipline"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit">Сохранить</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</#list>
+
 <script>
     function openForm() {
         document.getElementById("myModal").style.display = "block";
@@ -122,14 +143,50 @@
     function closeForm() {
         document.getElementById("myModal").style.display = "none";
     }
-    function openEditForm() {
-        document.getElementById("myEditModal").style.display = "block";
+
+    function openEditForm(teacherId) {
+        var modalId = "myEditModal-" + teacherId;
+        document.getElementById(modalId).style.display = "block";
     }
 
-    function closeEditForm() {
-        document.getElementById("myEditModal").style.display = "none";
+    function closeEditForm(teacherId) {
+        var modalId = "myEditModal-" + teacherId;
+        document.getElementById(modalId).style.display = "none";
     }
+
+    function sortTable() {
+        var table = document.querySelector("table");
+        var rows = Array.from(table.querySelectorAll("tbody tr"));
+
+        rows.sort(function (a, b) {
+            var idA = parseInt(a.querySelector("td").textContent);
+            var idB = parseInt(b.querySelector("td").textContent);
+            return idA - idB;
+        });
+
+        var tbody = table.querySelector("tbody");
+        rows.forEach(function (row) {
+            tbody.appendChild(row);
+        });
+    }
+    window.addEventListener("DOMContentLoaded", sortTable);
+
+    function searchTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var table = document.querySelector("table");
+        var rows = table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+            var fullName = row.querySelector("td:nth-child(2)").textContent.toUpperCase();
+            if (fullName.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
 </script>
-</div>
 </body>
 </html>

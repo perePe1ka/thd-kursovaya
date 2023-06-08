@@ -28,7 +28,7 @@
             <h1>Методическая литература</h1>
         </div>
         <div class="header">
-
+            <input type="text" id="searchInput" placeholder="Поиск по названию" onkeyup="searchTable()" />
             <button class="add-button" onclick="openForm()">Добавить литературу</button>
         </div>
 
@@ -41,10 +41,10 @@
                 <th>ID</th>
                 <th>Название</th>
                 <th>Вид материала</th>
-                <th>Референс на специальность</th>
-                <th>Референс на дисциплину</th>
-                <th>Референс на Преподов</th>
-                <th>Референс на Кафедры</th>
+                <th>Подходит специальности</th>
+                <th>Подходит дисциплине</th>
+                <th>Издал препод</th>
+                <th>Издала кафедра</th>
                 <th>Удалить</th>
                 <th>Изменить</th>
                 </thead>
@@ -86,7 +86,8 @@
                         </td>
                         <td>
                             <div>
-                                <button class="add-button" onclick="openEditForm()">Изменить</button>
+                                <button class="add-button" onclick="openEditForm(${literature.id})">Изменить</button>
+
                             </div>
                         </td>
                     </tr>
@@ -95,22 +96,29 @@
             </table>
         </#if>
 
+
+
+
+
     </div>
 </div>
-<div id="myEditModal" class="modal">
+<div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditForm()">&times;</span>
-        <h2>Изменить</h2>
+        <span class="close" onclick="closeForm()">&times;</span>
+        <h2>Добавить литературу</h2>
 
-        <form action="/createDepartaments" method="post">
+        <form action="/createLiterature" method="post">
 
             <table>
                 <tr>
                     <td>Название литературы:</td>
                     <td>
                         <input type="text" name="name"/>
-                        <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
+                        <input type="text" name="type_of_material"/>
+                        <input type="text" name="speciality"/>
+                        <input type="text" name="discipline"/>
+                        <input type="text" name="teachers"/>
+                        <input type="text" name="departaments"/>
                     </td>
                 </tr>
                 <tr>
@@ -122,6 +130,36 @@
         </form>
     </div>
 </div>
+<#list listLiterature as literature>
+    <div id="myEditModal-${literature.id}" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditForm()">&times;</span>
+        <h2>Добавить литературу</h2>
+
+        <form action="/literature/edit/${literature.id}" method="post">
+
+            <table>
+                <tr>
+                    <td>Название литературы:</td>
+                    <td>
+                        <input type="text" name="name"/>
+                        <input type="text" name="type_of_material"/>
+                        <input type="text" name="speciality"/>
+                        <input type="text" name="discipline"/>
+                        <input type="text" name="teachers"/>
+                        <input type="text" name="departaments"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Сохранить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</#list>
 <script>
     function openForm() {
         document.getElementById("myModal").style.display = "block";
@@ -130,12 +168,49 @@
     function closeForm() {
         document.getElementById("myModal").style.display = "none";
     }
-    function openEditForm() {
-        document.getElementById("myEditModal").style.display = "block";
+    function openEditForm(literatureId) {
+        var modalId = "myEditModal-" + literatureId;
+        document.getElementById(modalId).style.display = "block";
     }
 
-    function closeEditForm() {
-        document.getElementById("myEditModal").style.display = "none";
+    function closeEditForm(literatureId) {
+        var modalId = "myEditModal-" + literatureId;
+        document.getElementById(modalId).style.display = "none";
+    }
+
+
+    function sortTable() {
+        var table = document.querySelector("table");
+        var rows = Array.from(table.querySelectorAll("tbody tr"));
+
+        rows.sort(function (a, b) {
+            var idA = parseInt(a.querySelector("td").textContent);
+            var idB = parseInt(b.querySelector("td").textContent);
+            return idA - idB;
+        });
+
+        var tbody = table.querySelector("tbody");
+        rows.forEach(function (row) {
+            tbody.appendChild(row);
+        });
+    }
+    // Вызываем функцию sortTable() после загрузки страницы, чтобы список был отсортирован изначально
+    window.addEventListener("DOMContentLoaded", sortTable);
+
+    function searchTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var table = document.querySelector("table");
+        var rows = table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+            var name = row.querySelector("td:nth-child(2)").textContent.toUpperCase();
+            if (name.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
     }
 </script>
 </body>

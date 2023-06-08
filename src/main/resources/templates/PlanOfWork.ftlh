@@ -28,7 +28,7 @@
             <h1>Планируемая работа</h1>
         </div>
         <div class="header">
-
+            <input type="text" id="searchInput" placeholder="Поиск по названию" onkeyup="searchTable()" />
             <button class="add-button" onclick="openForm()">Добавить работу</button>
         </div>
 
@@ -40,7 +40,7 @@
                 <th>Название</th>
                 <th>Дедлайн</th>
                 <th>Нагрузка</th>
-                <th>Референс на кафедру</th>
+                <th>В какой кафедре есть</th>
                 <th>Удалить</th>
                 <th>Изменить</th>
                 </thead>
@@ -64,7 +64,7 @@
                         </td>
                         <td>
                             <div>
-                                <button class="add-button" onclick="openEditForm()">Изменить</button>
+                                <button class="add-button" onclick="openEditForm(${planOfWork.id})">Изменить</button>
                             </div>
                         </td>
                     </tr>
@@ -77,20 +77,53 @@
 
     </div>
 </div>
-<div id="myEditModal" class="modal">
+<div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditForm()">&times;</span>
-        <h2>Изменить</h2>
+        <span class="close" onclick="closeForm()">&times;</span>
+        <h2>Добавить работу</h2>
 
-        <form action="/createDepartaments" method="post">
+
+        <form action="/createPlanOfWork" method="post">
 
             <table>
                 <tr>
                     <td>Название работы:</td>
                     <td>
                         <input type="text" name="name"/>
-                        <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
+                        <input type="text" name="deadline"/>
+                        <input type="text" name="workload"/>
+                        <input type="text" name="department"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Сохранить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
+    </div>
+</div>
+
+<#list listPlanOfWork as planOfWork>
+    <div id="myEditModal-${planOfWork.id}" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditForm()">&times;</span>
+        <h2>Добавить работу</h2>
+
+
+        <form action="/planOfWork/edit/${planOfWork.id}" method="post">
+
+            <table>
+                <tr>
+                    <td>Название работы:</td>
+                    <td>
+                        <input type="text" name="name"/>
+                        <input type="text" name="deadline"/>
+                        <input type="text" name="workload"/>
+                        <input type="text" name="department"/>
                     </td>
                 </tr>
                 <tr>
@@ -102,6 +135,8 @@
         </form>
     </div>
 </div>
+</#list>
+
 <script>
     function openForm() {
         document.getElementById("myModal").style.display = "block";
@@ -110,13 +145,51 @@
     function closeForm() {
         document.getElementById("myModal").style.display = "none";
     }
-    function openEditForm() {
-        document.getElementById("myEditModal").style.display = "block";
+    function openEditForm(planOfWorkId) {
+        var modalId = "myEditModal-" + planOfWorkId;
+        document.getElementById(modalId).style.display = "block";
     }
 
-    function closeEditForm() {
-        document.getElementById("myEditModal").style.display = "none";
+    function closeEditForm(planOfWorkId) {
+        var modalId = "myEditModal-" + planOfWorkId;
+        document.getElementById(modalId).style.display = "none";
     }
+
+
+    function sortTable() {
+        var table = document.querySelector("table");
+        var rows = Array.from(table.querySelectorAll("tbody tr"));
+
+        rows.sort(function (a, b) {
+            var idA = parseInt(a.querySelector("td").textContent);
+            var idB = parseInt(b.querySelector("td").textContent);
+            return idA - idB;
+        });
+
+        var tbody = table.querySelector("tbody");
+        rows.forEach(function (row) {
+            tbody.appendChild(row);
+        });
+    }
+    // Вызываем функцию sortTable() после загрузки страницы, чтобы список был отсортирован изначально
+    window.addEventListener("DOMContentLoaded", sortTable);
+
+    function searchTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var table = document.querySelector("table");
+        var rows = table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+            var name = row.querySelector("td:nth-child(2)").textContent.toUpperCase();
+            if (name.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

@@ -28,7 +28,7 @@
             <h1>Дисциплины</h1>
         </div>
         <div class="header">
-
+            <input type="text" id="searchInput" placeholder="Поиск по названию" onkeyup="searchTable()" />
             <button class="add-button" onclick="openForm()">Добавить дисциплину</button>
         </div>
 
@@ -41,8 +41,8 @@
                 <th>ID</th>
                 <th>Название</th>
                 <th>Вид занятий</th>
-                <th>Специальность</th>
-                <th>Преподаватель</th>
+                <th>Специальности дисциплины</th>
+                <th>Преподаватели дисциплины</th>
                 <th>Удалить</th>
                 <th>Изменить</th>
                 </thead>
@@ -58,8 +58,8 @@
                             </#list>
                         </td>
                         <td>
-                            <#list discipline.teachers as teacher> <!-- Итерация по множеству кафедр -->
-                                ${teacher.fullName}<br> <!-- Получение имени каждой кафедры -->
+                            <#list discipline.teachers as teacher>
+                                ${teacher.fullName}<br>
                             </#list>
                         </td>
                         <td>
@@ -69,7 +69,7 @@
                         </td>
                         <td>
                             <div>
-                                <button class="add-button" onclick="openEditForm()">Изменить</button>
+                                <button class="add-button" onclick="openEditForm(${discipline.id})">Изменить</button>
                             </div>
                         </td>
                     </tr>
@@ -84,20 +84,20 @@
 
     </div>
 </div>
-<div id="myEditModal" class="modal">
+<div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditForm()">&times;</span>
-        <h2>Изменить</h2>
+        <span class="close" onclick="closeForm()">&times;</span>
+        <h2>Добавить дисциплину</h2>
 
-        <form action="/createDepartaments" method="post">
+        <form action="/createDiscipline" method="post">
 
             <table>
                 <tr>
                     <td>Название дисциплины:</td>
-                    <td>
-                        <input type="text" name="name"/>
+                    <td><input type="text" name="name"/>
+                        <input type="text" name="class_type"/>
+                        <input type="text" name="specialities"/>
                         <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
                     </td>
                 </tr>
                 <tr>
@@ -107,10 +107,36 @@
                 </tr>
             </table>
         </form>
-
-
     </div>
 </div>
+
+<#list listDiscipline as discipline>
+    <div id="myEditModal-${discipline.id}" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditForm()">&times;</span>
+        <h2>Изменить дисциплину</h2>
+
+        <form action="/discipline/edit/${discipline.id}" method="post">
+
+            <table>
+                <tr>
+                    <td>Изменить</td>
+                    <td><input type="text" name="name"/>
+                        <input type="text" name="class_type"/>
+                        <input type="text" name="specialities"/>
+                        <input type="text" name="teacher"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Сохранить</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</#list>
 
 <script>
     function openForm() {
@@ -120,12 +146,50 @@
     function closeForm() {
         document.getElementById("myModal").style.display = "none";
     }
-    function openEditForm() {
-        document.getElementById("myEditModal").style.display = "block";
+    function openEditForm(disciplineId) {
+        var modalId = "myEditModal-" + disciplineId;
+        document.getElementById(modalId).style.display = "block";
     }
 
-    function closeEditForm() {
-        document.getElementById("myEditModal").style.display = "none";
+    function closeEditForm(disciplineId) {
+        var modalId = "myEditModal-" + disciplineId;
+        document.getElementById(modalId).style.display = "none";
+    }
+
+
+    function sortTable() {
+        var table = document.querySelector("table");
+        var rows = Array.from(table.querySelectorAll("tbody tr"));
+
+        rows.sort(function (a, b) {
+            var idA = parseInt(a.querySelector("td").textContent);
+            var idB = parseInt(b.querySelector("td").textContent);
+            return idA - idB;
+        });
+
+        var tbody = table.querySelector("tbody");
+        rows.forEach(function (row) {
+            tbody.appendChild(row);
+        });
+    }
+
+    // Вызываем функцию sortTable() после загрузки страницы, чтобы список был отсортирован изначально
+    window.addEventListener("DOMContentLoaded", sortTable);
+
+    function searchTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var table = document.querySelector("table");
+        var rows = table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+            var name = row.querySelector("td:nth-child(2)").textContent.toUpperCase();
+            if (name.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
     }
 </script>
 </body>
