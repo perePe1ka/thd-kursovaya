@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Преподаватели</title>
+    <title>Методическая литература</title>
     <link rel="stylesheet" href="../static/tables.css">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 </head>
@@ -28,8 +28,8 @@
             <h1>Методическая литература</h1>
         </div>
         <div class="header">
-            <h2>Преводаватели</h2>
-            <button class="add-button" onclick="openForm()">Добавить преподавателя</button>
+
+            <button class="add-button" onclick="openForm()">Добавить литературу</button>
         </div>
 
 
@@ -53,14 +53,25 @@
                         <td>${literature.id}</td>
                         <td>${literature.name}</td>
                         <td>${literature.type_of_material}</td>
-                        <td>${literature.speciality.name}</td>
                         <td>
-                            ${literature.discipline.name},
-                            ${literature.discipline.class_type}.
+                            <#if literature.speciality??>
+                                ${literature.speciality.name}
+                            </#if>
+                        </td>
+
+                        <td>
+                        <#if literature.discipline??>
+                            ${literature.discipline.name}
+                            ${literature.discipline.class_type}
+                        </#if>
                         </td>
                         <td>
-                            ${literature.teachers.fullName}
+                            <#if literature.teachers??>
+                                ${literature.teachers.fullName}
+                            </#if>
                         </td>
+
+
                         <td>
                             <#list literature.departaments as departaments> <!-- Итерация по множеству кафедр -->
                                 ${departaments.name}<br> <!-- Получение имени каждой кафедры -->
@@ -83,12 +94,20 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeForm()">&times;</span>
-        <h2>Добавить преподавателя</h2>
-        <form th:action="@{/artist/create}" method="POST">
+        <h2>Добавить литературу</h2>
+
+        <form action="/createLiterature" method="post">
+
             <table>
                 <tr>
-                    <td>Имя преподавателя:</td>
-                    <td><input type="text" name="fullName"/></td>
+                    <td>Название литературы:</td>
+                    <td>
+                        <input type="text" name="name"/>
+                        <input type="text" name="type_of_material"/>
+                        <input type="text" name="fk_id_speciality"/>
+                        <input type="text" name="fk_id_discipline"/>
+                        <input type="text" name="fk_id_teachers"/>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -97,6 +116,8 @@
                 </tr>
             </table>
         </form>
+
+
     </div>
 </div>
 <script>

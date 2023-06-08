@@ -38,8 +38,9 @@ input, button, textarea {
     font-family: inherit;
 }
 
-input::-ms-clear {
-    display: none;
+input {
+    border: 1px solid black;
+    padding: 1px;
 }
 
 button {
@@ -124,6 +125,8 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
 }
+
+
 
 th, td {
     padding: 10px;
@@ -301,4 +304,11 @@ body.modal-open {
 .menubox li {
     margin: 0 0 30px 0;
     /*text-align: center;*/
+}
+
+input {
+    border: 2px solid black !important;
+    padding: 5px !important;
+    border-color: black;
+    border: black;
 }

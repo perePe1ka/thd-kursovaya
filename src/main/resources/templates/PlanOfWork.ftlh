@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Преподаватели</title>
+    <title>План работы</title>
     <link rel="stylesheet" href="../static/tables.css">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 </head>
@@ -28,8 +28,8 @@
             <h1>Планируемая работа</h1>
         </div>
         <div class="header">
-            <h2>Преводаватели</h2>
-            <button class="add-button" onclick="openForm()">Добавить преподавателя</button>
+
+            <button class="add-button" onclick="openForm()">Добавить работу</button>
         </div>
 
 
@@ -51,8 +51,10 @@
                         <td>${planOfWork.deadline}</td>
                         <td>${planOfWork.workload}</td>
                         <td>
-                            ${planOfWork.department.id},
-                            ${planOfWork.department.name}.
+                            <#if planOfWork.department??>
+                                ${planOfWork.department.id},
+                                ${planOfWork.department.name}.
+                            </#if>
                         </td>
                         <td><a href="paper/delete/${planOfWork.id}">Удалить</a></td>
                     </tr>
@@ -68,12 +70,20 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeForm()">&times;</span>
-        <h2>Добавить преподавателя</h2>
-        <form th:action="@{/artist/create}" method="POST">
+        <h2>Добавить работу</h2>
+
+
+        <form action="/createPlanOfWork" method="post">
+
             <table>
                 <tr>
-                    <td>Имя преподавателя:</td>
-                    <td><input type="text" name="fullName"/></td>
+                    <td>Название работы:</td>
+                    <td>
+                        <input type="text" name="name"/>
+                        <input type="text" name="deadline"/>
+                        <input type="text" name="workload"/>
+                        <input type="text" name="fk_departaments_id"/>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -82,6 +92,8 @@
                 </tr>
             </table>
         </form>
+
+
     </div>
 </div>
 <script>

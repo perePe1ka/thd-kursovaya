@@ -1,9 +1,13 @@
 package ru.kursavaya.vlad.thdkursovaya.controller;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import ru.kursavaya.vlad.thdkursovaya.model.*;
 import ru.kursavaya.vlad.thdkursovaya.service.*;
+
 
 @Controller
 public class MainController {
@@ -71,6 +75,46 @@ public class MainController {
         model.addAttribute("listDepartaments", departamentsService.getAll());
         return "Departaments";
     }
+
+    @PostMapping("/createTeachers")
+    public String createTeachers(@ModelAttribute Teachers teachers) {
+        teachersService.create(teachers);
+        return "redirect:/teachers";
+    }
+
+    @PostMapping("/createSpeciality")
+    public String createSpeciality(@ModelAttribute Speciality speciality) {
+        specialityService.create(speciality);
+        return "redirect:/speciality";
+    }
+
+    @PostMapping("/createPlanOfWork")
+    public String createPlanOfWork(@ModelAttribute PlanOfWork planOfWork) {
+        planOfWorkService.create(planOfWork);
+        return "redirect:/planOfWork";
+    }
+
+    @PostMapping("/createLiterature")
+    public String createLiterature(@ModelAttribute Literature literature) {
+        literatureService.create(literature);
+        return "redirect:/literature";
+    }
+
+    @PostMapping("/createDiscipline")
+    public String createDiscipline(@ModelAttribute Discipline discipline) {
+        disciplineService.create(discipline);
+        return "redirect:/discipline";
+    }
+
+    @PostMapping("/createDepartaments")
+    public String createDepartaments(@ModelAttribute Departaments departaments) {
+        departamentsService.create(departaments);
+        return "redirect:/departaments";
+    }
+
+
+
+
 
 
 

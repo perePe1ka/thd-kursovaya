@@ -13,7 +13,6 @@
             <span></span>
         </label>
         <ul class="menubox">
-
                 <li><a class="menubox_ref" href="/">На главную</a></li>
                 <li><a class="menubox_ref" href="/teachers">Преподаватели</a></li>
                 <li><a class="menubox_ref" href="/speciality">Специальности</a></li>
@@ -21,11 +20,6 @@
                 <li><a class="menubox_ref" href="/literature">Методическая литература</a></li>
                 <li><a class="menubox_ref" href="/discipline">Дисциплины</a></li>
                 <li><a class="menubox_ref" href="/departaments">Кафедры</a></li>
-
-<#--            <li><a class="menubox_ref" href="/publish">Преподаватель/Литература</a></li>-->
-<#--            <li><a class="menubox_ref" href="/leads">Преподаватель/Дисциплина</a></li>-->
-<#--            <li><a class="menubox_ref" href="/belongdispec">Спецальность/Дисциплина</a></li>-->
-<#--            <li><a class="menubox_ref" href="/belongteachdep">Учитель/Кафедра</a></li>-->
         </ul>
     </div>
     <div id="content">
@@ -33,7 +27,6 @@
             <h1>Преподаватели</h1>
         </div>
         <div class="header">
-            <h2>Преводаватели</h2>
             <button class="add-button" onclick="openForm()">Добавить преподавателя</button>
         </div>
 
@@ -64,10 +57,18 @@
                             </#list>
                         </td>
                         <td>
-                            ${teacher.planOfWork.deadline},
-                            ${teacher.planOfWork.name},
-                            ${teacher.planOfWork.workload}.
+                        <#if teacher.planOfWork??>
+
+                                ${teacher.planOfWork.deadline},
+                                ${teacher.planOfWork.name},
+                                ${teacher.planOfWork.workload}.
+
+                        <#else>
+                            <!-- Handle the case when teacher.planOfWork is null or missing -->
+                            No plan of work available
+                        </#if>
                         </td>
+
                         <td><a href="paper/delete/${teacher.id}">Удалить</a></td>
                     </tr>
                 </#list>
@@ -84,8 +85,9 @@
     <div class="modal-content">
         <span class="close" onclick="closeForm()">&times;</span>
         <h2>Добавить преподавателя</h2>
-        <form th:action="@{/artist/create}" method="POST">
-            <table>
+        <form action="/createTeachers" method="post">
+
+        <table>
                 <tr>
                     <td>Имя преподавателя:</td>
                     <td><input type="text" name="fullName"/></td>

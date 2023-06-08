@@ -28,7 +28,7 @@
             <h1>Специальности</h1>
         </div>
         <div class="header">
-            <h2>Специальности</h2>
+
             <button class="add-button" onclick="openForm()">Добавить специльность</button>
         </div>
 
@@ -65,11 +65,13 @@
     <div class="modal-content">
         <span class="close" onclick="closeForm()">&times;</span>
         <h2>Добавить специальность</h2>
-        <form th:action="@{/artist/create}" method="POST">
+
+        <form action="/createSpeciality" method="post">
+
             <table>
                 <tr>
-                    <td>Название  спецальности:</td>
-                    <td><input type="text" name="fullName"/></td>
+                    <td>Название специальности:</td>
+                    <td><input type="text" name="name"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -78,6 +80,8 @@
                 </tr>
             </table>
         </form>
+
+
     </div>
 </div>
 <script>
