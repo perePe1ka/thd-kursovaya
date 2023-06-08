@@ -61,7 +61,11 @@
                                 ${teacher.fullName}<br> <!-- Получение имени каждой кафедры -->
                             </#list>
                         </td>
-                        <td><a href="paper/delete/${discipline.id}">Удалить</a></td>
+                        <td>
+                            <form action="/discipline/delete/${discipline.id}" method="post">
+                                <input type="submit" value="Удалить"/>
+                            </form>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>

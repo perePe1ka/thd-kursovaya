@@ -78,7 +78,11 @@
                             </#list>
                         </td>
 
-                        <td><a href="paper/delete/${literature.id}">Удалить</a></td>
+                        <td>
+                            <form action="/literature/delete/${literature.id}" method="post">
+                                <input type="submit" value="Удалить"/>
+                            </form>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>

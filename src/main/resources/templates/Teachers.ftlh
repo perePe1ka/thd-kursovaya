@@ -69,7 +69,10 @@
                         </#if>
                         </td>
 
-                        <td><a href="paper/delete/${teacher.id}">Удалить</a></td>
+                        <td><form action="/teacher/delete/${teacher.id}" method="post">
+                                <input type="submit" value="Удалить"/>
+                            </form>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>

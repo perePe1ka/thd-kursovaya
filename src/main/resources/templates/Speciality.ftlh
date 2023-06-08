@@ -51,7 +51,11 @@
                                 ${discipline.name}<br> <!-- Получение имени каждой кафедры -->
                             </#list>
                         </td>
-                        <td><a href="paper/delete/${speciality.id}">Удалить</a></td>
+                        <td>
+                            <form action="/speciality/delete/${speciality.id}" method="post">
+                                <input type="submit" value="Удалить"/>
+                            </form>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>

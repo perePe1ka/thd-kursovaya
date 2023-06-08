@@ -56,7 +56,11 @@
                                 ${planOfWork.department.name}.
                             </#if>
                         </td>
-                        <td><a href="paper/delete/${planOfWork.id}">Удалить</a></td>
+                        <td>
+                            <form action="/planOfWork/delete/${planOfWork.id}" method="post">
+                                <input type="submit" value="Удалить"/>
+                            </form>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>

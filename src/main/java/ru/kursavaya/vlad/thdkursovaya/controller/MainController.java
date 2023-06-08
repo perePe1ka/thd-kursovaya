@@ -1,10 +1,7 @@
 package ru.kursavaya.vlad.thdkursovaya.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import ru.kursavaya.vlad.thdkursovaya.model.*;
 import ru.kursavaya.vlad.thdkursovaya.service.*;
 
@@ -109,6 +106,42 @@ public class MainController {
     @PostMapping("/createDepartaments")
     public String createDepartaments(@ModelAttribute Departaments departaments) {
         departamentsService.create(departaments);
+        return "redirect:/departaments";
+    }
+
+    @PostMapping("/teacher/delete/{id}")
+    public String deleteTeacher(@PathVariable int id) {
+        teachersService.deleteTeachers(id);
+        return "redirect:/teachers";
+    }
+
+    @PostMapping("/speciality/delete/{id}")
+    public String deleteSpeciality(@PathVariable int id) {
+        specialityService.deleteSpeciality(id);
+        return "redirect:/speciality";
+    }
+
+    @PostMapping("/planOfWork/delete/{id}")
+    public String deletePlanOfWork(@PathVariable int id) {
+        planOfWorkService.deletePlanOfWork(id);
+        return "redirect:/planOfWork";
+    }
+
+    @PostMapping("/literature/delete/{id}")
+    public String deleteLiterature(@PathVariable int id) {
+        literatureService.deleteLiterature(id);
+        return "redirect:/literature";
+    }
+
+    @PostMapping("/discipline/delete/{id}")
+    public String deleteDiscipline(@PathVariable int id) {
+        disciplineService.deleteDiscipline(id);
+        return "redirect:/discipline";
+    }
+
+    @PostMapping("/departament/delete/{id}")
+    public String deleteDepatament(@PathVariable int id) {
+        departamentsService.deleteDepartaments(id);
         return "redirect:/departaments";
     }
 
