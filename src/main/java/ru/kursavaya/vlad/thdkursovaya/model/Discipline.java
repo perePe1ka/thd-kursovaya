@@ -23,13 +23,14 @@ public class Discipline {
     @Column
     private String  class_type;
 
-    @ManyToMany
-    @JoinTable(
-            name = "fk_spec_discip",
-            joinColumns = @JoinColumn(name = "id_discipline"),
-            inverseJoinColumns = @JoinColumn(name = "id_speciality")
-    )
+    @ManyToMany(mappedBy = "discipline")
     private Set<Speciality> speciality = new HashSet<>();
+
+
+
+    @ManyToMany(mappedBy = "discipline")
+    private Set<Teachers> teachers  = new HashSet<>();
+
 
     @ManyToMany
     @JoinTable(
@@ -37,8 +38,13 @@ public class Discipline {
             joinColumns = @JoinColumn(name = "id_discipline"),
             inverseJoinColumns = @JoinColumn(name = "id_teacher")
     )
-    private Set<Teachers> teachers = new HashSet<>();
+    private Set<Teachers> teacher = new HashSet<>();
 
-
-
+    @ManyToMany
+    @JoinTable(
+            name = "fk_spec_discip",
+            joinColumns = @JoinColumn(name = "id_discipline"),
+            inverseJoinColumns = @JoinColumn(name = "id_speciality")
+    )
+    private Set<Speciality> specialities = new HashSet<>();
 }

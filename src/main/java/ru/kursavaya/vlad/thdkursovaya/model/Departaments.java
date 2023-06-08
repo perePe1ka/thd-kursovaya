@@ -25,11 +25,22 @@ public class Departaments {
     @ManyToMany(mappedBy = "departaments")
     private Set<Teachers> teachers = new HashSet<>();
 
+    @ManyToMany(mappedBy = "departaments")
+    private Set<Literature> literature= new HashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "fk_izdayot",
             joinColumns = @JoinColumn(name = "id_departament"),
             inverseJoinColumns = @JoinColumn(name = "id_literature")
     )
-    private Set<Literature> literature = new HashSet<>();
+    private Set<Literature> literatures = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "fk_teacher_dep",
+            joinColumns = @JoinColumn(name = "id_departament"),
+            inverseJoinColumns = @JoinColumn(name = "id_teacher")
+    )
+    private Set<Teachers> teacher = new HashSet<>();
 }

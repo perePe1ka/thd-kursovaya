@@ -12,26 +12,19 @@ import java.util.Set;
 
 @Controller
 public class MainController {
-    private final BelongTeachDepService belongTeachDepService;
-    private final BelongDisSpecService belongDisSpecService;
     private final DepartamentsService departamentsService;
     private final DisciplineService disciplineService;
-    private final LeadsService leadsService;
     private final LiteratureService literatureService;
     private final PlanOfWorkService planOfWorkService;
-    private final PublishService publishService;
     private final SpecialityService specialityService;
     private final TeachersService teachersService;
 
-    public MainController(BelongTeachDepService belongTeachDepService, BelongDisSpecService belongDisSpecService, DepartamentsService departamentsService, DisciplineService disciplineService, LeadsService leadsService, LiteratureService literatureService, PlanOfWorkService planOfWorkService, PublishService publishService, SpecialityService specialityService, TeachersService teachersService) {
-        this.belongTeachDepService = belongTeachDepService;
-        this.belongDisSpecService = belongDisSpecService;
+    public MainController(DepartamentsService departamentsService, DisciplineService disciplineService, LiteratureService literatureService, PlanOfWorkService planOfWorkService, SpecialityService specialityService, TeachersService teachersService) {
+
         this.departamentsService = departamentsService;
         this.disciplineService = disciplineService;
-        this.leadsService = leadsService;
         this.literatureService = literatureService;
         this.planOfWorkService = planOfWorkService;
-        this.publishService = publishService;
         this.specialityService = specialityService;
         this.teachersService = teachersService;
     }
@@ -90,7 +83,6 @@ public class MainController {
             }
             teachers.setDepartaments(departaments);
         }
-
         // Если указаны дисциплины, обработайте их и сохраните в объекте преподавателя
         if (disciplineIds != null && !disciplineIds.isEmpty()) {
             Set<Discipline> disciplines = new HashSet<>();
@@ -124,6 +116,8 @@ public class MainController {
 
 
 
+    //НИЖЕ СДЕЛАНЫ ДОБАВЛЕНИЯ
+
     @PostMapping("/createPlanOfWork")
     public String createPlanOfWork(@ModelAttribute PlanOfWork planOfWork) {
         planOfWorkService.create(planOfWork);
@@ -147,6 +141,8 @@ public class MainController {
         departamentsService.create(departaments);
         return "redirect:/departaments";
     }
+
+    //УДАЛЕНИЯ СДЕЛАНЫ НИЖЕ
 
     @PostMapping("/teacher/delete/{id}")
     public String deleteTeacher(@PathVariable int id) {
@@ -184,7 +180,84 @@ public class MainController {
         return "redirect:/departaments";
     }
 
+    //ЭДИТЫ НАЧИНАЮТСЯ НИЖЕ
+    @GetMapping("/teachers/edit/{id}")
+    public String getTeachers(@PathVariable int id, Model model) {
+        Teachers teachers = teachersService.getTeachers(id);
+        model.addAttribute("teacher", teachers);
+        return "Teachers";
+    }
 
+    @PostMapping("/teachers/edit/{id}")
+    public String editTeachers(@ModelAttribute Teachers teachers) {
+        teachersService.updateTeachers(teachers);
+        return "redirect:/teachers";
+    }
+
+    @GetMapping("/speciality/edit/{id}")
+    public String getSpeciality(@PathVariable int id, Model model) {
+        Speciality speciality = specialityService.getSpeciality(id);
+        model.addAttribute("speciality", speciality);
+        return "Speciality";
+    }
+
+    @PostMapping("/speciality/edit/{id}")
+    public String editSpeciality(@ModelAttribute Speciality speciality) {
+        specialityService.updateSpeciality(speciality);
+        return "redirect:/speciality";
+    }
+
+    @GetMapping("/planOfWork/edit/{id}")
+    public String getPlanOfWork(@PathVariable int id, Model model) {
+        PlanOfWork planOfWork = planOfWorkService.getPlanOfWork(id);
+        model.addAttribute("planOfWork", planOfWork);
+        return "PlanOfWork";
+    }
+
+    @PostMapping("/planOfWork/edit/{id}")
+    public String editPlanOfWork(@ModelAttribute PlanOfWork planOfWork) {
+        planOfWorkService.updatePlanOfWork(planOfWork);
+        return "redirect:/planOfWork";
+    }
+
+    @GetMapping("/literature/edit/{id}")
+    public String getLiterature(@PathVariable int id, Model model) {
+        Literature literature = literatureService.getLiterature(id);
+        model.addAttribute("literature", literature);
+        return "Literature";
+    }
+
+    @PostMapping("/literature/edit/{id}")
+    public String editLiterature(@ModelAttribute Literature literature) {
+        literatureService.updateLiterature(literature);
+        return "redirect:/literature";
+    }
+
+    @GetMapping("/discipline/edit/{id}")
+    public String getDiscipline(@PathVariable int id, Model model) {
+        Discipline discipline = disciplineService.getDiscipline(id);
+        model.addAttribute("discipline", discipline);
+        return "Discipline";
+    }
+
+    @PostMapping("/discipline/edit/{id}")
+    public String editDiscipline(@ModelAttribute Discipline discipline) {
+        disciplineService.updateDiscipline(discipline);
+        return "redirect:/discipline";
+    }
+
+    @GetMapping("/departaments/edit/{id}")
+    public String getDepartament(@PathVariable int id, Model model) {
+        Departaments departaments = departamentsService.getDepartaments(id);
+        model.addAttribute("departament", departaments);
+        return "Departament";
+    }
+
+    @PostMapping("/departaments/edit/{id}")
+    public String editDepartaments(@ModelAttribute Departaments departaments) {
+        departamentsService.updateDepartaments(departaments);
+        return "redirect:/departaments";
+    }
 
 
 

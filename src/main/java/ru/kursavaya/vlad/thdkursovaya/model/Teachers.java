@@ -34,8 +34,13 @@
         )
         private Set<Departaments> departaments = new HashSet<>();
 
-        @ManyToMany(mappedBy = "teachers")
-        private Set<Discipline> discipline  = new HashSet<>();
+        @ManyToMany
+        @JoinTable(
+                name = "vedet",
+                joinColumns = @JoinColumn(name = "id_teacher"),
+                inverseJoinColumns = @JoinColumn(name = "id_discipline")
+        )
+        private Set<Discipline> discipline = new HashSet<>();
 
 
     }

@@ -44,6 +44,7 @@
                 <th>Специальность</th>
                 <th>Преподаватель</th>
                 <th>Удалить</th>
+                <th>Изменить</th>
                 </thead>
                 <tbody>
                 <#list listDiscipline as discipline>
@@ -66,6 +67,11 @@
                                 <input type="submit" value="Удалить"/>
                             </form>
                         </td>
+                        <td>
+                            <div>
+                                <button class="add-button" onclick="openEditForm()">Изменить</button>
+                            </div>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>
@@ -78,18 +84,20 @@
 
     </div>
 </div>
-<div id="myModal" class="modal">
+<div id="myEditModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeForm()">&times;</span>
-        <h2>Добавить дисциплину</h2>
+        <span class="close" onclick="closeEditForm()">&times;</span>
+        <h2>Изменить</h2>
 
-        <form action="/createDiscipline" method="post">
+        <form action="/createDepartaments" method="post">
 
             <table>
                 <tr>
                     <td>Название дисциплины:</td>
-                    <td><input type="text" name="name"/>
-                        <input type="text" name="class_type"/>
+                    <td>
+                        <input type="text" name="name"/>
+                        <input type="text" name="teacher"/>
+                        <input type="text" name="literatures"/>
                     </td>
                 </tr>
                 <tr>
@@ -103,6 +111,7 @@
 
     </div>
 </div>
+
 <script>
     function openForm() {
         document.getElementById("myModal").style.display = "block";
@@ -110,6 +119,13 @@
 
     function closeForm() {
         document.getElementById("myModal").style.display = "none";
+    }
+    function openEditForm() {
+        document.getElementById("myEditModal").style.display = "block";
+    }
+
+    function closeEditForm() {
+        document.getElementById("myEditModal").style.display = "none";
     }
 </script>
 </body>

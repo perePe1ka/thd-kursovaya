@@ -22,7 +22,14 @@ public class Speciality {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "speciality")
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "fk_spec_discip",
+            joinColumns = @JoinColumn(name = "id_speciality"),
+            inverseJoinColumns = @JoinColumn(name = "id_discipline")
+    )
     private Set<Discipline> discipline = new HashSet<>();
 
 }

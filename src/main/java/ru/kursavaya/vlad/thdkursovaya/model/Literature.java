@@ -33,6 +33,13 @@ public class Literature {
     @JoinColumn(name = "fk_id_teachers")
     private Teachers teachers;
 
-    @ManyToMany(mappedBy = "literature")
-    private Set<Departaments> departaments= new HashSet<>();
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "fk_izdayot",
+            joinColumns = @JoinColumn(name = "id_literature"),
+            inverseJoinColumns = @JoinColumn(name = "id_departament")
+    )
+    private Set<Departaments> departaments = new HashSet<>();
 }
