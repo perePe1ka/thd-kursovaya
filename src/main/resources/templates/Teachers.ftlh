@@ -94,11 +94,11 @@
         <form action="/createTeachers" method="post">
             <table>
                 <tr>
-                    <td>Имя преподавателя:</td>
-                    <td><input type="text" name="fullName"/></td>
-                    <td><input type="text" name="planOfWork"/></td>
-                    <td><input type="text" name="departaments"/></td>
-                    <td><input type="text" name="discipline"/></td>
+                    <td>Введите данные:</td>
+                    <td><input type="text" name="fullName" placeholder="ФИО"/></td>
+                    <td><input type="text" name="planOfWork" placeholder="План работы(цифра)"/></td>
+                    <td><input type="text" name="departaments" placeholder="Кафедра(цифра)"/></td>
+                    <td><input type="text" name="discipline" placeholder="Дисциплина(цифра)"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -118,11 +118,11 @@
             <form action="/teachers/edit/${teacher.id}" method="post">
                 <table>
                     <tr>
-                        <td>Изменить:</td>
-                        <td><input type="text" name="fullName"/></td>
-                        <td><input type="text" name="planOfWork"/></td>
-                        <td><input type="text" name="departaments"/></td>
-                        <td><input type="text" name="discipline"/></td>
+                        <td>Измените данные:</td>
+                        <td><input type="text" name="fullName" placeholder="ФИО"/></td>
+                        <td><input type="text" name="planOfWork" placeholder="План работы(цифра)"/></td>
+                        <td><input type="text" name="departaments" placeholder="Кафедра(цифра)"/></td>
+                        <td><input type="text" name="discipline" placeholder="Дисциплина(цифра)"/></td>
                     </tr>
                     <tr>
                         <td colspan="2">

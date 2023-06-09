@@ -89,11 +89,11 @@
 
             <table>
                 <tr>
-                    <td>Название кафедры:</td>
+                    <td>Введите данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="teacher" placeholder="Преподаватель(цифра)"/>
+                        <input type="text" name="literatures" placeholder="Литература(цифра)"/>
                     </td>
                 </tr>
                 <tr>
@@ -117,11 +117,11 @@
 
             <table>
                 <tr>
-                    <td>Название кафедры:</td>
+                    <td>Введите данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
+                        <input type="text" name="name" placeholder="Название" />
+                        <input type="text" name="teacher" placeholder="Преподаватель(цифра)"/>
+                        <input type="text" name="literatures" placeholder="Литература(цифра)"/>
                     </td>
                 </tr>
                 <tr>
@@ -144,11 +144,11 @@
 
             <table>
                 <tr>
-                    <td>Название кафедры:</td>
+                    <td>Измените данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="teacher"/>
-                        <input type="text" name="literatures"/>
+                        <input type="text" name="name" placeholder="Название" />
+                        <input type="text" name="teacher" placeholder="Преподаватель(цифра)"/>
+                        <input type="text" name="literatures" placeholder="Литература(цифра)"/>
                     </td>
                 </tr>
                 <tr>

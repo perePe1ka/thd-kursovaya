@@ -111,14 +111,14 @@
 
             <table>
                 <tr>
-                    <td>Название литературы:</td>
+                    <td>Введите данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="type_of_material"/>
-                        <input type="text" name="speciality"/>
-                        <input type="text" name="discipline"/>
-                        <input type="text" name="teachers"/>
-                        <input type="text" name="departaments"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="type_of_material" placeholder="Тип материала"/>
+                        <input type="text" name="speciality" placeholder="Специальность(цифра)"/>
+                        <input type="text" name="discipline" placeholder="Дисциплина(цифра)"/>
+                        <input type="text" name="teachers" placeholder="Преподаватель(цифра)"/>
+                        <input type="text" name="departaments" placeholder="Кафедра(цифра)"/>
                     </td>
                 </tr>
                 <tr>
@@ -140,14 +140,14 @@
 
             <table>
                 <tr>
-                    <td>Название литературы:</td>
+                    <td>Измените данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="type_of_material"/>
-                        <input type="text" name="speciality"/>
-                        <input type="text" name="discipline"/>
-                        <input type="text" name="teachers"/>
-                        <input type="text" name="departaments"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="type_of_material" placeholder="Тип материала"/>
+                        <input type="text" name="speciality" placeholder="Специальность(цифра)"/>
+                        <input type="text" name="discipline" placeholder="Дисциплина(цифра)"/>
+                        <input type="text" name="teachers" placeholder="Преподаватель(цифра)"/>
+                        <input type="text" name="departaments" placeholder="Кафедра(цифра)"/>
                     </td>
                 </tr>
                 <tr>

@@ -80,10 +80,10 @@
 
             <table>
                 <tr>
-                    <td>Название специальности:</td>
+                    <td>Введите данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="discipline"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="discipline" placeholder="Дисциплина(цифра)"/>
                     </td>
                 </tr>
                 <tr>
@@ -105,10 +105,10 @@
 
             <table>
                 <tr>
-                    <td>Название специальности:</td>
+                    <td>Измените данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="discipline"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="discipline" placeholder="Дисциплина(цифра)"/>
                     </td>
                 </tr>
                 <tr>

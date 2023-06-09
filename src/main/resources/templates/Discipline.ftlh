@@ -93,11 +93,11 @@
 
             <table>
                 <tr>
-                    <td>Название дисциплины:</td>
-                    <td><input type="text" name="name"/>
-                        <input type="text" name="class_type"/>
-                        <input type="text" name="specialities"/>
-                        <input type="text" name="teacher"/>
+                    <td>Введите данные:</td>
+                    <td><input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="class_type" placeholder="Вид занятий"/>
+                        <input type="text" name="specialities" placeholder="Специальность(цифра)"/>
+                        <input type="text" name="teacher" placeholder="Преподаватель(цифра)"/>
                     </td>
                 </tr>
                 <tr>
@@ -120,11 +120,11 @@
 
             <table>
                 <tr>
-                    <td>Изменить</td>
-                    <td><input type="text" name="name"/>
-                        <input type="text" name="class_type"/>
-                        <input type="text" name="specialities"/>
-                        <input type="text" name="teacher"/>
+                    <td>Измените данные:</td>
+                    <td><input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="class_type" placeholder="Вид занятий"/>
+                        <input type="text" name="specialities" placeholder="Специальность(цифра)"/>
+                        <input type="text" name="teacher" placeholder="Преподаватель(цифра)"/>
                     </td>
                 </tr>
                 <tr>

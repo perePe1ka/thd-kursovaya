@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Методическая литература</title>
+  <title>Основная страница</title>
   <link rel="stylesheet" href="./static/tables.css">
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 </head>
@@ -20,7 +20,7 @@
     </ul>
   </div>
   <div id="content">
-    <h1>Методическая литература</h1>
+    <h1>Содержание</h1>
 
 
 

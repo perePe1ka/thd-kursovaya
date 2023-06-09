@@ -87,12 +87,12 @@
 
             <table>
                 <tr>
-                    <td>Название работы:</td>
+                    <td>Введите данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="deadline"/>
-                        <input type="text" name="workload"/>
-                        <input type="text" name="department"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="deadline" placeholder="Срок"/>
+                        <input type="text" name="workload" placeholder="Нагрузка"/>
+                        <input type="text" name="department" placeholder="Кафедра(цифра)"/>
                     </td>
                 </tr>
                 <tr>
@@ -118,12 +118,12 @@
 
             <table>
                 <tr>
-                    <td>Название работы:</td>
+                    <td>Измените данные:</td>
                     <td>
-                        <input type="text" name="name"/>
-                        <input type="text" name="deadline"/>
-                        <input type="text" name="workload"/>
-                        <input type="text" name="department"/>
+                        <input type="text" name="name" placeholder="Название"/>
+                        <input type="text" name="deadline" placeholder="Срок"/>
+                        <input type="text" name="workload" placeholder="Нагрузка"/>
+                        <input type="text" name="department" placeholder="Кафедра(цифра)"/>
                     </td>
                 </tr>
                 <tr>
